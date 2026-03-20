@@ -24,9 +24,9 @@ By default, HTML forms try to send data via the URL (GET request) and refresh th
 
 Although a client-side validation can not fully stop a hacker because he/she can bypass the browser, this step provides a first line of defense and ensures Data Integrity regarding the authentication process.
 
-* The @ Check: By using !email.includes('@'), we perform a basic structural check. This ensures the data "looks" like an email before the server wastes resources processing it.
+* The @ Check: The expression ${\color{red}!email.includes('@')}\space$ performs a basic structural check to ensure that the data "looks" like an email before the data is sent to the server.
 
-* Length Constraint: Checking password.length < 8 enforces a minimum entropy.
+* Length Constraint: The expression ${\color{red}password.length < 8}\space$ enforces the minimum length of the server.
 
 UX Feedback: If these checks fail, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
