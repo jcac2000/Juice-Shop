@@ -34,7 +34,7 @@ Although a client-side validation can not fully stop a hacker because he/she can
 
 Modern JavaScript uses async/await with the fetch function to talk to the backend.
 
-* JSON Encapsulation: Instead of sending a messy string, ${\color{red}JSON.stringify({ email, password })}\space$ is used to package the data into a structured object.
+* JSON Encapsulation: Instead of sending a string with the raw data, ${\color{red}JSON.stringify({ email, password })}\space$ is used to package the data into a structured object.
 
 * Headers: We set 'Content-Type': 'application/json'. This tells the server exactly how to parse the incoming "blob" of data.
 
