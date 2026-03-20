@@ -14,10 +14,9 @@ This file implements a simple HTML form to simulate Juice Shop’s login page.
 </div>
 ```
 
-The file includes a JavaScript code to provide basic security functions on client's side. This JavaScript handles three distinct phases: Interception, Validation, and Secure Transmission.
+The file includes a JavaScript code to provide basic security functions on client's side. This JavaScript handles three distinct phases: Interception, Validation, and Secure Transmission, and starts by "listening" for the submit event.
 
-1. Event Interception (addEventListener)
-The script begins by "listening" for the submit event.
+<strong>1. Event Interception (addEventListener)</strong>
 
 e.preventDefault(): This is the most critical first step. By default, HTML forms try to refresh the page and send data via the URL (GET request). We stop this to keep the credentials out of the browser history and to allow our custom logic to run.
 
