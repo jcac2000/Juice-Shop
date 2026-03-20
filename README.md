@@ -28,7 +28,7 @@ Although a client-side validation can not fully stop a hacker because he/she can
 
 * Length Constraint: The expression ${\color{red}password.length < 8}\space$ enforces the minimum length of the server.
 
-UX Feedback: If these checks fail, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
+&rarr; User feedback (UX). If these conditions are not met, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
 <strong>3. The fetch API and Asynchronous Communication</strong>
 Modern JavaScript uses async/await with the fetch function to talk to the backend.
