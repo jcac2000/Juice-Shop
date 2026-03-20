@@ -92,13 +92,12 @@ function updateStatus(msg, type) {
 }
 ```
 
-The JavaScript code prevents SQL Injection by acting as a basic entry barrier.
-If a user types the expression ' OR 1=1-- to bypass the authentication process, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value.
+The JavaScript code prevents SQL Injection by acting as a basic entry barrier. If a user types the expression ' OR 1=1-- to bypass the authentication process, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value. A basic concatenation with this entry might materialize the exploit. This JavaScript code ensures that the malicious string is sent as one unit to the Parameterized Query on the backend, where it is safely compared against the database.
 
-A basic concatenation with this entry might materialize the exploit. This JavaScript code ensures that the malicious string is sent as one unit to the Parameterized Query on the backend, where it is safely compared against the database.
+Note: An additional security measure was added on version 2 of the JS code. In this case, the submit button is disable after it is pressed to prevent double-click.
 
 <h2>CSS:</h2> 
-Finally, the file includes a CSS to emulate the original form provided in https://preview.owasp-juice.shop/#/login
+In adition, the file includes a CSS to emulate the original form provided in https://preview.owasp-juice.shop/#/login
 
 ```CSS
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e1e; color: #cfcfcf; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
@@ -110,4 +109,26 @@ button:hover { background-color: #7986cb; }
 .status-msg { font-size: 0.85rem; margin-top: 15px; text-align: center; min-height: 1.2em; }
 .error { color: #ff5252; }
 .success { color: #4caf50; }
+```
+
+<h2>Server side control:</h2> 
+
+Finally, it is important to consider that to control the ${\color{green}' OR 1=1--}\space$ attack, it is important to handle the input on the server side using Placeholders (or Parameterized Queries or Prepared Statements).
+
+```JavaScript
+app.post('/api/v1/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    // '?' placeholder treats input as a string, not as part of SQL command
+    const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
+
+    // The driver safely escapes the ' OR 1=1-- and searches for that literal text.
+    const [rows] = await db.execute(query, [email, password]);
+
+    if (rows.length > 0) {
+        res.status(200).send("Welcome!");
+    } else {
+        res.status(401).send("Invalid login.");
+    }
+});
 ```
