@@ -20,7 +20,8 @@ The file includes a JavaScript code to provide basic security functions on clien
 
 By default, HTML forms try to send data via the URL (GET request) and refresh the page. This behavior is modified using ${\color{red}e.preventDefault()}\space$ in order to keep the credentials out of the browser history and to run the security validation process. Both email and password data are obtained using ${\color{red}document.getElementById().value}\space$ function from input fields.
 
-<strong>2. Client-Side Validation Logic</strong>
+<strong>2. Client-Side Validation Logic - First line of defense</strong>
+
 This is the first line of defense. It isn’t meant to stop a hacker (since a hacker can bypass the browser), but it is meant to ensure Data Integrity.
 
 The @ Check: By using !email.includes('@'), we perform a basic structural check. This ensures the data "looks" like an email before the server wastes resources processing it.
