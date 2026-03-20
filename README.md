@@ -81,8 +81,8 @@ function updateStatus(msg, type) {
 }
 ```
 
-The JavaScript component prevents SQL Injection by acting as a "cleaner."
-When a user types ' OR 1=1--, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value.
+The JavaScript code prevents SQL Injection by acting as a "barrier."
+When a user types the classical expression ' OR 1=1--, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value.
 
 If you were using old-school concatenation, the ' might break the code. But in our improved script, the JavaScript ensures the entire malicious string is sent as one unit to the Parameterized Query on the backend, where it is safely compared against the database.
 
