@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login Mockup - OWASP for https://preview.owasp-juice.shop/</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e1e; color: #cfcfcf; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-container { background: #2d2d2d; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 320px; }
+        h2 { text-align: center; color: #fff; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #444; border-radius: 4px; background: #3c3c3c; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #5c6bc0; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s; }
+        button:hover { background-color: #7986cb; }
+        .status-msg { font-size: 0.85rem; margin-top: 15px; text-align: center; min-height: 1.2em; }
+        .error { color: #ff5252; }
+        .success { color: #4caf50; }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Juice Shop Login</h2>
+    <form id="secureLoginForm">
+        <input type="email" id="email" placeholder="Email (e.g., admin@juice.shop)" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" id="loginBtn">Log in</button>
+    </form>
+    <div id="statusMessage" class="status-msg"></div>
+</div>
+
+<script>
+const loginForm = document.getElementById('secureLoginForm');
+const statusMessage = document.getElementById('statusMessage');
+const submitBtn = loginForm.querySelector('button[type="submit"]'); // Grab the button
+
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // 1. Basic Validation
+    if (!email.includes('@') || password.length < 8) {
+        updateStatus("Invalid email or password too short.", "error");
+        return;
+    }
+
+    // 2. UI State: Loading
+    statusMessage.textContent = "Processing...";
+    statusMessage.className = "status-msg";
+    submitBtn.disabled = true; // Prevent double-clicks
+
+    try {
+        const response = await fetch('/api/v1/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        if (response.ok) {
+            updateStatus("Login successful!", "success");
+            // Redirect user or store token here
+        } else {
+            // Avoid being too specific about WHY it failed (security best practice)
+            updateStatus("Invalid credentials. Please try again.", "error");
+        }
+    } catch (err) {
+        console.error("Connection error:", err);
+        // Changed to "error" class because the login didn't actually happen
+        updateStatus("Unable to connect to server. Please check your internet.", "error");
+    } finally {
+        submitBtn.disabled = false; // Re-enable button
+    }
+});
+
+function updateStatus(msg, type) {
+    statusMessage.textContent = msg;
+    statusMessage.className = `status-msg ${type}`;
+}
+</script>
+
+</body>
+</html>
