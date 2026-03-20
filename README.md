@@ -30,14 +30,15 @@ Although a client-side validation can not fully stop a hacker because he/she can
 
 &rarr; User feedback (UX). If these conditions are not met, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
-<strong>3. The fetch API and Asynchronous Communication</strong>
+<strong>3. The fetch API and Asynchronous communication</strong>
+
 Modern JavaScript uses async/await with the fetch function to talk to the backend.
 
-JSON Encapsulation: Instead of sending a messy string, we use JSON.stringify({ email, password }). This packages the data into a structured object.
+* JSON Encapsulation: Instead of sending a messy string, we use JSON.stringify({ email, password }). This packages the data into a structured object.
 
-Headers: We set 'Content-Type': 'application/json'. This tells the server exactly how to parse the incoming "blob" of data.
+* Headers: We set 'Content-Type': 'application/json'. This tells the server exactly how to parse the incoming "blob" of data.
 
-The "Wait" State: Because network requests take time, await pauses the function execution (but not the whole browser), allowing us to show a "Processing..." message to the user.
+* The "Wait" State: Because network requests take time, await pauses the function execution (but not the whole browser), allowing us to show a "Processing..." message to the user.
 
 ```JavaScript
 const loginForm = document.getElementById('secureLoginForm');
