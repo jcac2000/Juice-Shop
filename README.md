@@ -18,9 +18,7 @@ The file includes a JavaScript code to provide basic security functions on clien
 
 <strong>1. Event Interception (addEventListener)</strong>
 
-e.preventDefault(): This is the most critical first step. By default, HTML forms try to refresh the page and send data via the URL (GET request). We stop this to keep the credentials out of the browser history and to allow our custom logic to run.
-
-Data Capture: We use document.getElementById().value to pull the raw strings from the input fields into local variables.
+e.preventDefault(): By default, HTML forms try to send data via the URL (GET request) and refresh the page. This behavior is modified to keep the credentials out of the browser history and to run the security validation process. Both email and password information are obtained using document.getElementById().value function from input fields.
 
 <strong>2. Client-Side Validation Logic</strong>
 This is the first line of defense. It isn’t meant to stop a hacker (since a hacker can bypass the browser), but it is meant to ensure Data Integrity.
@@ -44,12 +42,16 @@ The "Wait" State: Because network requests take time, await pauses the function 
 const loginForm = document.getElementById('secureLoginForm');
 const statusMessage = document.getElementById('statusMessage');
 
+// 1. Event Interception (addEventListener)
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
     statusMessage.textContent = "Processing...";
     statusMessage.className = "status-msg";
+
+    // 2. Client-Side Validation Logic
     if (!email.includes('@') || password.length < 8) {
         updateStatus("Invalid input format.", "error");
         return;
@@ -70,6 +72,7 @@ loginForm.addEventListener('submit', async (e) => {
         updateStatus("Demo: Input captured safely!", "success");
     }
 });
+
 function updateStatus(msg, type) {
     statusMessage.textContent = msg;
     statusMessage.className = `status-msg ${type}`;
