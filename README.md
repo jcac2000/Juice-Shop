@@ -36,9 +36,9 @@ Modern JavaScript uses async/await with the fetch function to talk to the backen
 
 * JSON Encapsulation: Instead of sending a string with the raw data, the expression ${\color{red}JSON.stringify({ email, password })}\space$ is used to package the data into a structured object.
 
-* Headers: The expression ${\color{red}'Content-Type': 'application/json'}\space$ tells the server how to parse the incoming "blob" of data.
+* Headers: The expression ${\color{red}'Content-Type': 'application/json'}\space$ tells the server how to parse the incoming data.
 
-* The "Wait" State: Because network requests take time, await pauses the function execution (but not the whole browser), allowing us to show a "Processing..." message to the user.
+* The "Wait" State: Because network requests can take time, await pauses the function execution (but not the browser) allowing a "Processing..." message to the user.
 
 ```JavaScript
 const loginForm = document.getElementById('secureLoginForm');
