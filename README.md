@@ -22,7 +22,7 @@ e.preventDefault(): This is the most critical first step. By default, HTML forms
 
 Data Capture: We use document.getElementById().value to pull the raw strings from the input fields into local variables.
 
-2. Client-Side Validation Logic
+<strong>2. Client-Side Validation Logic</strong>
 This is the first line of defense. It isn’t meant to stop a hacker (since a hacker can bypass the browser), but it is meant to ensure Data Integrity.
 
 The @ Check: By using !email.includes('@'), we perform a basic structural check. This ensures the data "looks" like an email before the server wastes resources processing it.
@@ -31,7 +31,7 @@ Length Constraints: Checking password.length < 8 enforces a minimum entropy.
 
 UX Feedback: If these checks fail, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
-3. The fetch API and Asynchronous Communication
+<strong>3. The fetch API and Asynchronous Communication</strong>
 Modern JavaScript uses async/await with the fetch function to talk to the backend.
 
 JSON Encapsulation: Instead of sending a messy string, we use JSON.stringify({ email, password }). This packages the data into a structured object.
