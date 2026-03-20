@@ -111,6 +111,7 @@ button:hover { background-color: #7986cb; }
 .success { color: #4caf50; }
 ```
 
+
 <h2>Server side control:</h2> 
 
 Finally, it is important to consider that to control the ${\color{green}' OR 1=1--}\space$ attack, it is important to handle the input on the server side using Placeholders (or Parameterized Queries or Prepared Statements).
