@@ -1,5 +1,6 @@
 # Secure login for Juice-Shop (SQL injection prevention)
 
+<h2>HTML:</h2> 
 This file implements a simple HTML form to simulate Juice Shop’s login page.
 
 ```HTML
@@ -14,13 +15,14 @@ This file implements a simple HTML form to simulate Juice Shop’s login page.
 </div>
 ```
 
+<h2>JavaScript:</h2> 
 The file includes a JavaScript code to provide basic security functions on client's side. This JavaScript handles three distinct phases: Interception, Validation, and Secure Transmission, and starts by "listening" for the submit event.
 
-<strong>1. Event Interception (addEventListener)</strong>
+<h3>1. Event Interception (addEventListener)</h3>
 
 By default, HTML forms try to send data via the URL (GET request) and refresh the page. This behavior is modified using ${\color{red}e.preventDefault()}\space$ in order to keep the credentials out of the browser history and to run the security validation process. Both email and password data are obtained using ${\color{red}document.getElementById().value}\space$ function from input fields.
 
-<strong>2. Client-Side Validation Logic - First line of defense</strong>
+<h3>2. Client-Side Validation Logic - First line of defense</h3>
 
 Although a client-side validation can not fully stop a hacker because he/she can bypass the browser, this step provides a first line of defense and ensures Data Integrity regarding the authentication process.
 
@@ -30,7 +32,7 @@ Although a client-side validation can not fully stop a hacker because he/she can
 
 &rarr; User feedback (UX). If these conditions are not met, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
-<strong>3. The fetch API and Asynchronous communication</strong>
+<h3>3. The fetch API and Asynchronous communication</h3>
 
 Modern JavaScript uses async/await with the fetch function to talk to the backend.
 
@@ -81,12 +83,13 @@ function updateStatus(msg, type) {
 }
 ```
 
-The JavaScript code prevents SQL Injection by acting as a "barrier."
-When a user types the classical expression ' OR 1=1--, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value.
+The JavaScript code prevents SQL Injection by acting as a basic entry barrier.
+If a user types the expression ' OR 1=1-- to bypass the authentication process, the JavaScript treats it as a Literal String. By sending it as a JSON property, it arrives at the server as a single value.
 
-If you were using old-school concatenation, the ' might break the code. But in our improved script, the JavaScript ensures the entire malicious string is sent as one unit to the Parameterized Query on the backend, where it is safely compared against the database.
+A basic concatenation with this entry might materialize the exploit. This JavaScript code ensures that the malicious string is sent as one unit to the Parameterized Query on the backend, where it is safely compared against the database.
 
-Finally, the file includes a CSS component to emulate the original form provided in https://preview.owasp-juice.shop/#/login
+<h2>CSS:</h2> 
+Finally, the file includes a CSS to emulate the original form provided in https://preview.owasp-juice.shop/#/login
 
 ```CSS
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e1e; color: #cfcfcf; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
