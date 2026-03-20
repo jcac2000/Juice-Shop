@@ -22,11 +22,11 @@ By default, HTML forms try to send data via the URL (GET request) and refresh th
 
 <strong>2. Client-Side Validation Logic - First line of defense</strong>
 
-This is the first line of defense. It isn’t meant to stop a hacker (since a hacker can bypass the browser), but it is meant to ensure Data Integrity.
+Although a client-side validation can not fully stop a hacker because he/she can bypass the browser, this step provides a first line of defense and ensures Data Integrity regarding the authentication process.
 
-The @ Check: By using !email.includes('@'), we perform a basic structural check. This ensures the data "looks" like an email before the server wastes resources processing it.
+* The @ Check: By using !email.includes('@'), we perform a basic structural check. This ensures the data "looks" like an email before the server wastes resources processing it.
 
-Length Constraints: Checking password.length < 8 enforces a minimum entropy.
+* Length Constraint: Checking password.length < 8 enforces a minimum entropy.
 
 UX Feedback: If these checks fail, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
