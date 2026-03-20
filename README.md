@@ -45,35 +45,44 @@ Modern JavaScript uses async/await with the fetch function to talk to the backen
 ```JavaScript
 const loginForm = document.getElementById('secureLoginForm');
 const statusMessage = document.getElementById('statusMessage');
+const submitBtn = loginForm.querySelector('button[type="submit"]'); // Grab the button
 
-// 1. Event Interception (addEventListener)
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    statusMessage.textContent = "Processing...";
-    statusMessage.className = "status-msg";
-
-    // 2. Client-Side Validation Logic
+    // 1. Basic Validation
     if (!email.includes('@') || password.length < 8) {
-        updateStatus("Invalid input format.", "error");
+        updateStatus("Invalid email or password too short.", "error");
         return;
     }
+
+    // 2. UI State: Loading
+    statusMessage.textContent = "Processing...";
+    statusMessage.className = "status-msg";
+    submitBtn.disabled = true; // Prevent double-clicks
+
     try {
         const response = await fetch('/api/v1/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
+
         if (response.ok) {
             updateStatus("Login successful!", "success");
+            // Redirect user or store token here
         } else {
-            updateStatus("Login failed. SQL Injection blocked.", "error");
+            // This message avoid being too specific about WHY it failed (security best practice)
+            updateStatus("Invalid credentials. Please try again.", "error");
         }
     } catch (err) {
         console.error("Connection error:", err);
-        updateStatus("Demo: Input captured safely!", "success");
+        updateStatus("Unable to connect to server!", "error");
+    } finally {
+        submitBtn.disabled = false; // Re-enable button
     }
 });
 
