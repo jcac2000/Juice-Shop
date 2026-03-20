@@ -18,7 +18,7 @@ The file includes a JavaScript code to provide basic security functions on clien
 
 <strong>1. Event Interception (addEventListener)</strong>
 
-By default, HTML forms try to send data via the URL (GET request) and refresh the page. This behavior is modified using $${\color{red}e.preventDefault()} \space$$ to keep the credentials out of the browser history and to run the security validation process. Both email and password information are obtained using document.getElementById().value function from input fields.
+By default, HTML forms try to send data via the URL (GET request) and refresh the page. This behavior is modified using ${\color{red}e.preventDefault()}\space$ in order to keep the credentials out of the browser history and to run the security validation process. Both email and password data are obtained using document.getElementById().value function from input fields.
 
 <strong>2. Client-Side Validation Logic</strong>
 This is the first line of defense. It isn’t meant to stop a hacker (since a hacker can bypass the browser), but it is meant to ensure Data Integrity.
