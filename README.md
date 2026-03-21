@@ -28,7 +28,7 @@ Although a client-side validation can not fully stop a hacker because he/she can
 
 * The @ Check: The expression ${\color{red}!email.includes('@')}\space$ performs a basic structural check to ensure that the data "looks" like an email before the data is sent to the server.
 
-* Length Constraint: The expression ${\color{red}password.length < 8}\space$ enforces the minimum length of the server.
+* Length Constraint: The expression ${\color{red}password.length < 8}\space$ enforces the minimum length of the password.
 
 &rarr; User feedback (UX). If these conditions are not met, the script updates the DOM (the visible webpage) to show an error message without a page reload, creating a smooth "Single Page Application" (SPA) feel.
 
